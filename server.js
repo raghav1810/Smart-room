@@ -27,6 +27,7 @@ var valPrev = 0;
 board.on("ready", function() {
 	io.sockets.on('connection', newConnection)
 
+	var led = new five.Led(13);
 	const motor = new five.Motor(6);
 	photoresistor = new five.Sensor({
 	    pin: "A1",
@@ -57,9 +58,11 @@ board.on("ready", function() {
 		        roomState=1;
 		        console.log("SENDING")
 		        io.emit('temperature', t)
+		        led.on()
 		      }
 		    else{
 		      roomState=0;
+		      led.off()
 		    }
 		  }
 		  ;
